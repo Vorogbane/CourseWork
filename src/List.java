@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class List {
     int i;
-    private Employee [] list;
+    public Employee [] list;
 
     public List() {
         list = new Employee[10];
@@ -21,7 +21,7 @@ public class List {
             System.out.println(list[i]);
         }
     }
-    public double CountSalary () {
+    public double countSalary () {
         double sum = 0;
         for (int i = 0; i < list.length; i++) {
             if (list [i] != null) {
@@ -30,68 +30,54 @@ public class List {
         }
         return sum;
     }
-    public double CountSalaryPerDepartment (int department) {
+    public double countSalaryPerDepartment (int department) {
         double sum = 0;
         for (int i = 0; i < list.length; i++) {
-            if (list [i] != null & list[i].getDepartment() == department) {
+            if (list [i] != null && list[i].getDepartment() == department) {
                 sum = sum + list[i].getSalary();
             }
         }
         return sum;
     }
 
-    public Employee findMaxSalary () {
+    public double findMaxSalary () {
         double maximum = 0;
         for (int i = 0; i < list.length; i++) {
-            if (list[i] != null & maximum < list[i].getSalary()) {
+            if (list[i] != null && maximum < list[i].getSalary()) {
                 maximum = list[i].getSalary();
             }
         }
-        for (int i = 0; i < list.length; i++) {
-            if (maximum == list[i].getSalary())
-                return list[i];
-        }
-        return list[i];
+        return maximum;
     }
-    public Employee findMaxSalaryPerDepartment (int department) {
+    public double findMaxSalaryPerDepartment (int department) {
         double maximum = 0;
         for (int i = 0; i < list.length; i++) {
-            if (list[i] != null & list[i].getDepartment() == department & maximum < list[i].getSalary()) {
+            if (list[i] != null && list[i].getDepartment() == department & maximum < list[i].getSalary()) {
                 maximum = list[i].getSalary();
             }
         }
-        for (int i = 0; i < list.length; i++) {
-            if (maximum == list[i].getSalary())
-                return list[i];
-        }
-        return list[i];
+        return maximum;
     }
 
-    public Employee findMinSalaryPerDepartment (int department) {
+    public double findMinSalaryPerDepartment (int department) {
         double minimum = 1000000000;
         for (int i = 0; i < list.length; i++) {
-            if (list[i] != null & list[i].getDepartment() == department & minimum > list[i].getSalary()) {
+            if (list[i] != null && list[i].getDepartment() == department & minimum > list[i].getSalary()) {
                 minimum = list[i].getSalary();
             }
         }
-        for (int i = 0; i < list.length; i++) {
-            if (minimum == list[i].getSalary())
-                return list[i];
-        }
-        return list[i];
+
+        return minimum;
     }
-    public Employee findMinSalary () {
+    public double findMinSalary () {
         double minimum = 1000000000;
         for (int i = 0; i < list.length; i++) {
-            if (list[i] != null & minimum > list[i].getSalary()) {
+            if (list[i] != null && minimum > list[i].getSalary()) {
                 minimum = list[i].getSalary();
             }
         }
-        for (int i = 0; i < list.length; i++) {
-            if (minimum == list[i].getSalary())
-            return list[i];
-        }
-        return list[i];
+
+        return minimum;
     }
 
     public double findAverageSalary () {
@@ -99,18 +85,18 @@ public class List {
         for (int i = 0; i < list.length; i++) {
             objectsCounter++;
         }
-        double averageSalary = CountSalary() / objectsCounter;
+        double averageSalary = countSalary() / objectsCounter;
         return averageSalary;
     }
 
     public double findAverageSalaryPerDepartment (int department) {
     int objectsCounter = 0;
         for (int i = 0; i < list.length; i++) {
-            if (department == list[i].getDepartment()) {
+            if (department == list[i].getDepartment() && list[i] != null) {
                 objectsCounter++;
             }
         }
-        double averageSalary = CountSalaryPerDepartment(department) / objectsCounter;
+        double averageSalary = countSalaryPerDepartment(department) / objectsCounter;
         return averageSalary;
     }
     public Employee getEmployee (int i) {
@@ -118,14 +104,16 @@ public class List {
     }
     public void printFio () {
         for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i].getFio());
+            if (list[i] != null) {
+                System.out.println(list[i].getFio());
+            }
         }
     }
 
     public void printEmployeesPerDepartment (int department) {
         for (int i = 0; i < list.length; i++) {
-            if (list[i].getDepartment() == department) {
-                System.out.println(list[i].getFio() + " " + list[i].getId() + " " + list[i].getSalary());
+            if (list[i].getDepartment() == department && list[i] != null) {
+                System.out.println(list[i].getFio() + " " + list[i].getDepartment() + " отдел");
 
             }
         }
@@ -133,7 +121,7 @@ public class List {
 
     public void printEmployeesWithLesserSalary (double salary) {
         for (int i = 0; i < list.length; i++) {
-            if (list[i].getSalary() < salary) {
+            if (list[i].getSalary() < salary && list[i] != null) {
                 System.out.println(list[i].getFio() + " " + list[i].getId() + " " + list[i].getSalary());
 
             }
@@ -141,7 +129,7 @@ public class List {
     }
     public void printEmployeesWithBiggerSalary (double salary) {
         for (int i = 0; i < list.length; i++) {
-            if (list[i].getSalary() >= salary) {
+            if (list[i].getSalary() >= salary && list[i] != null) {
                 System.out.println(list[i].getFio() + " " + list[i].getId() + " " + list[i].getSalary());
 
             }
@@ -150,14 +138,16 @@ public class List {
     public void salaryIndexation (double percent) {
         double newSalary;
         for (int i = 0; i < list.length; i++) {
-            newSalary = list[i].getSalary() + list[i].getSalary() * (percent / 100);
-            list[i].setSalary(newSalary);
+            if (list[i] != null) {
+                newSalary = list[i].getSalary() + list[i].getSalary() * (percent / 100);
+                list[i].setSalary(newSalary);
+            }
         }
     }
     public void salaryIndexationPerDepartment (double percent, int department) {
         double newSalary;
         for (int i = 0; i < list.length; i++) {
-            if (list[i].getDepartment() == department) {
+            if (list[i].getDepartment() == department && list[i] != null) {
                 newSalary = list[i].getSalary() + list[i].getSalary() * (percent / 100);
                 list[i].setSalary(newSalary);
             }
@@ -166,21 +156,21 @@ public class List {
 
     public void deleteFromTheList (int id) {
         for (int i = 0; i < list.length; i++) {
-            if (list[i].getId() == id) {
+            if (list[i].getId() == id && list[i] != null) {
                 list[i] = null;
             }
         }
     }
     public void changeSalaryRecord (String fio, double newSalary) {
         for (int i = 0; i < list.length; i++) {
-            if (fio.equalsIgnoreCase(list[i].getFio())) {
+            if (fio.equalsIgnoreCase(list[i].getFio()) && list[i] != null) {
                 list[i].setSalary(newSalary);
             }
         }
     }
     public void changeDepartmentRecord (String fio, int newDepartment) {
         for (int i = 0; i < list.length; i++) {
-            if (fio.equalsIgnoreCase(list[i].getFio())) {
+            if (fio.equalsIgnoreCase(list[i].getFio()) && list[i] != null) {
                 list[i].setDepartment(newDepartment);
             }
         }
@@ -190,7 +180,7 @@ public class List {
         while (!isSorted) {
             isSorted=true;
             for (int i = 1; i < list.length; i++) {
-                if (list[i].getDepartment() < list[i -1].getDepartment()) {
+                if (list[i].getDepartment() < list[i -1].getDepartment() && list[i] != null) {
                     Employee temp = list[i];
                     list[i] = list[i-1];
                     list[i-1]=temp;
@@ -200,9 +190,17 @@ public class List {
         }
         printFioAndDepartment();
     }
+    public void printListSortedByDepartmentSimplified () {
+        for (int i =1; i<6;i++) {
+            printEmployeesPerDepartment(i);
+        }
+    }
+
     public void printFioAndDepartment () {
         for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i].getFio() + ", " + list[i].getDepartment() + " отдел");
+            if (list[i] != null) {
+                System.out.println(list[i].getFio() + ", " + list[i].getDepartment() + " отдел");
+            }
         }
     }
 

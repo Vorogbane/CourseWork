@@ -12,24 +12,27 @@ public class Main {
         Employee yaropolk = new Employee("Ryazanskiy Yaropolk Sergeevich", 4, 21000);
         Employee bogdan = new Employee ("Manko Bogdan Ruslanovich", 5, 45000);
         Employee dobrynya = new Employee("Bogatyr Dobrynya Nikitich", 5, 97000);
+
         System.out.println("olga.getId() = " + olga.getId());
         System.out.println("olga.getFio() = " + olga.getFio());
         System.out.println(oleg.getId());
         System.out.println("Hello world!");
         System.out.println(array.getEmployee(1));
-        array.fillList(oleg);
-        array.fillList(olga);
-        array.fillList(vladimir);
-        array.fillList(svyatogor);
-        array.fillList(svyatoslav);
-        array.fillList(julius);
-        array.fillList(adolf);
-        array.fillList(yaropolk);
-        array.fillList(bogdan);
-        array.fillList(dobrynya);
+
+        array.list[0] = oleg;
+        array.list[1] = olga;
+        array.list[2] = vladimir;
+        array.list[3] = svyatogor;
+        array.list[4] = svyatoslav;
+        array.list[5] = julius;
+        array.list[6] = adolf;
+        array.list[7] = yaropolk;
+        array.list[8] = bogdan;
+        array.list[9] = dobrynya;
+
         olga.setSalary(22000);
         System.out.println("olga.getSalary() = " + olga.getSalary());
-        System.out.println("array.CountSalary() = " + array.CountSalary());
+        System.out.println("array.CountSalary() = " + array.countSalary());
         array.print ();
         System.out.println("array.findMinSalaryPerDepartment(4) = " + array.findMinSalaryPerDepartment(3));
         System.out.println("array.findMinSalary() = " + array.findMinSalary());
@@ -41,6 +44,7 @@ public class Main {
         array.printEmployeesPerDepartment(4);
         array.printEmployeesWithLesserSalary(10000);
         array.salaryIndexation(5);
+
         System.out.println("svyatogor.getSalary() = " + svyatogor.getSalary());
         array.salaryIndexationPerDepartment(100, 3);
         System.out.println("svyatogor.getSalary() = " + svyatogor.getSalary());
@@ -55,6 +59,9 @@ public class Main {
         System.out.println("adolf.getDepartment() = " + adolf.getDepartment());
         array.changeDepartmentRecord("adolf hitler", 4);
         array.printListSortedByDepartment();
+
+
+        array.printListSortedByDepartmentSimplified();
 
 
     }
